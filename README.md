@@ -1,9 +1,6 @@
-# Upspin `TODO` repository
+# Upspin `augie` repository
 
-TODO: Short description of what this repository is about.
+This repository contains a MacOS menu bar widget for Upspin users.
 
 See the [master repository](https://github.com/upspin/upspin#readme) for more information.
 
-## TODO
-
-TODO: Any details about this repository.
