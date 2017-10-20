@@ -25,7 +25,7 @@ var static struct {
 	dir  string
 }
 
-// File returns the file rooted at "exp.upspin.io/cmd/browser/static" either
+// File returns the file rooted at "augie.upspin.io/cmd/upspin-ui/static" either
 // from an in-memory map or, if no map was generated, the contents of the file
 // from disk.
 func File(name string) (string, error) {
@@ -38,7 +38,7 @@ func File(name string) (string, error) {
 
 	}
 	static.once.Do(func() {
-		pkg, _ := build.Default.Import("exp.upspin.io/cmd/browser/static", "", build.FindOnly)
+		pkg, _ := build.Default.Import("augie.upspin.io/cmd/upspin-ui/static", "", build.FindOnly)
 		if pkg == nil {
 			return
 		}
