@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<!--
+Copyright 2017 The Upspin Authors. All rights reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upspin browser</title>
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+
+    <!-- Bootstrap and Ladda -->
+    <link href="third_party/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="third_party/ladda/ladda-themeless.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
+.navbar {
+	margin-top: 20px;
+}
+.up-template {
+	visibility: hidden;
+	display: none;
+}
+.up-clickable {
+	cursor: pointer;
+}
+.up-breadcrumb, .up-error, .up-loading {
+	margin: 0;
+}
+.drag > .panel {
+	background-color: #f0f9ff;
+}
+</style>
+  </head>
+  <body>
+
+	<div class="container">
+		<div class="navbar navbar-default">
+			<div class="navbar-header">
+				<img class="navbar-brand" src="augie.png">
+			</div>
+			<p class="navbar-text" id="headerUsername"></p>
+		</div>
+		<div class="row up-browser-parent">
+		</div>
+	</div>
+
+<!-- browser template -->
+
+<div class="col-md-6 up-template up-browser">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="pull-right">
+				<button type="button" class="btn btn-default btn-sm up-mkdir">
+					<span class="glyphicon glyphicon-folder-close"></span>
+					&nbsp;
+					Make directory
+				</button>
+				<button type="button" class="btn btn-default btn-sm up-refresh">
+					<span class="glyphicon glyphicon-refresh"></span>
+					&nbsp;
+					Refresh
+				</button>
+			</div>
+			<button type="button" class="btn btn-default btn-sm up-delete">
+				<span class="glyphicon glyphicon-trash"></span>
+				&nbsp;
+				Delete
+			</button>
+			<button type="button" class="btn btn-default btn-sm up-copy">
+				<span class="glyphicon glyphicon-transfer"></span>
+				&nbsp;
+				Copy
+			</button>
+		</div>
+
+		<div class="panel-body">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default up-parent">
+						<psan class="glyphicon glyphicon-level-up"></span>
+					</button>
+				</span>
+				<input type="text" class="up-path form-control">
+			</div>
+			<div class="alert alert-danger up-error" role="alert">
+				Error message
+			</div>
+			<div class="alert alert-info up-loading" role="alert">
+				Loading...
+			</div>
+		</div>
+
+		<table class="table up-entries">
+			<tr>
+				<th><input type="checkbox" class="up-select-all"></th>
+				<th></th>
+				<th>Name</th>
+				<th>Size</th>
+				<th>Time</th>
+				<th></th>
+			</tr>
+			<tr class="up-template up-entry">
+				<td><input type="checkbox" class="up-entry-select"></td>
+				<td><span class="up-entry-icon glyphicon"></span></td>
+				<td class="up-entry-name"></td>
+				<td class="up-entry-size"></td>
+				<td class="up-entry-time"></td>
+				<td>
+					<button type="button" class="btn btn-default btn-xs up-entry-inspect">
+						<span class="glyphicon glyphicon-info-sign"></span>
+					</button>
+				</td>
+			</tr>
+			<tr class="up-empty">
+				<td colspan="6" class="text-center">The directory is empty.</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!-- loading modal -->
+
+<div id="mLoading" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Performing startup checks...</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		Please wait while we check the validity of your Upspin account
+		and check connectivity to your directory server.
+		</p>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">An error occurred</div>
+			<div class="panel-body"><pre class="up-error-msg"></pre></div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- signup modal -->
+
+<div id="mSignup" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Sign up an Upspin user</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		To use Upspin you must register a user name and public key with
+		the central key server.
+		</p>
+		<p>
+		Your user name is how the Upspin system and its users will
+		identify you and your data. A user name is just an
+		<a href="https://upspin.io/doc/faq.md#email" target="_blank">email address you own</a>
+		during signup. The email address itself is not used by Upspin
+		after signup; it doesn't matter if you lose or delete it later.
+		</p>
+		<div class="form-group">
+			<label for="signupUserName">User Name</label>
+			<input type="email" class="form-control" id="signupUserName" placeholder="Email address">
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+	      <button type="button" class="btn btn-primary ladda-button" data-style="expand-left"><span class="ladda-label">Sign up</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- secretSeed modal -->
+
+<div id="mSecretSeed" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Write down your secret key</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		An Upspin key pair was generated for you and stored in this
+		directory on your local machine:
+		</p>
+		<pre id="secretSeedKeyDir"></pre>
+		<p>
+		This key pair provides access to your Upspin identity and data.
+		If you lose the keys you can re-create them using this "secret seed":
+		</p>
+		<pre id="secretSeedSecretSeed"></pre>
+		<p>
+		<b>Write this down and store it in a secure, private place.
+		Do not share your secret key or this string with anyone.</b>
+		</p>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">OK, I wrote it down</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- verify modal -->
+
+<div id="mVerify" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Verify your email address</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		The Upspin key server has sent an email to
+		<b class="up-username"></b>
+		to verify your ownership of that address.
+		</p>
+		<p>
+		To complete the signup process, find that email, click the
+		verification link, and then click the 'Proceed' button.
+		</p>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default up-resend">Re-send verification email</button>
+        <button type="button" class="btn btn-primary up-proceed">Proceed</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- serverSelect modal -->
+
+<div id="mServerSelect" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Configure your Upspin servers</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		To store data in Upspin you need directory and store servers.
+		You may nominate existing servers or deploy them yourself.
+		Alternately, if you just want to read Upspin data you can skip
+		this step.
+		</p>
+		<div class="radio">
+			<label>
+				<input type="radio" name="serverSelectRadio" id="serverSelectExisting" value="none">
+				I will use existing Upspin servers.
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<input type="radio" name="serverSelectRadio" id="serverSelectGCP" value="none">
+				I will deploy new Upspin servers to the Google Cloud Platform.
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<input type="radio" name="serverSelectRadio" id="serverSelectNone" value="none" checked>
+				Skip configuring my servers; I'll use Upspin in read-only mode for now.
+			</label>
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- serverExisting modal -->
+
+<div id="mServerExisting" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Specify your Upspin servers</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		Specify the host names of your Upspin directory and store servers.
+		Ask your Upspin server administrator if you don't know what this means.
+		</p>
+		<div class="form-group">
+			<label for="serverExistingInputDirServer">Directory Server</label>
+			<input type="text" class="form-control" id="serverExistingDirServer" placeholder="Host name">
+		</div>
+		<div class="form-group">
+			<label for="serverExistingInputDirServer">Store Server</label>
+			<input type="text" class="form-control" id="serverExistingStoreServer" placeholder="Host name">
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- serverGCP modal -->
+
+<div id="mServerGCP" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Create a Google Cloud Platform project</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		To deploy an Upsipn server to the Google Cloud Platform,
+		follow these steps:
+		</p>
+		<ol>
+			<li><a href="https://console.cloud.google.com/project" target="_blank">Create a project</a>
+				(a collection of services: virtual machines,
+				storage, and so on),
+			</li>
+			<li><a href="https://support.google.com/cloud/answer/6293499#enable-billing" target="_blank">Enable billing</a>
+				for the project,</li>
+			<li><a href="https://console.cloud.google.com/iam-admin/serviceaccounts/project" target="_blank">Create a Service Account</a>, with these properties:
+				<ul>
+					<li>Set the <b>Name</b> to <b>"Owner"</b>.</li>
+					<li>Set the <b>Role</b> to <b>"Project Owner"</b>.</li>
+					<li>Furnish a new <b>JSON Private Key</b>.</li>
+				</ul>
+			</li>
+			<li>Upload the private key file using the form below.</li>
+		</ol>
+		<div class="form-group">
+			<label for="serverGCPKeyFile">JSON Private Key file:</label>
+			<input type="file" id="serverGCPKeyFile">
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- gcpDetails modal -->
+
+<div id="mGCPDetails" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Specify Google Cloud Platform details</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		Choose a name for the Google Cloud Storage Bucket that will
+		hold your Upspin data.
+		</p>
+		<div class="form-group">
+			<label for="gcpDetailsBucketName">Storage Bucket Name</label>
+			<input type="text" class="form-control" id="gcpDetailsBucketName" placeholder="Bucket name">
+			<p class="help-block">
+			This name must be globally unique, so we suggest using your Project ID as a prefix.
+			</p>
+		</div>
+		<p>
+		Choose the geographical locations of your Storage Bucket and
+		Compute Instance. For best performance these should be close to
+		the users of your Upspin server.
+		</p>
+		<div class="form-group">
+			<label for="gcpDetailsBucketLoc">Storage Bucket Location</label>
+			<select id="gcpDetailsBucketLoc" class="form-control">
+			</select>
+			<p class="help-block">
+			See the
+			<a href="https://cloud.google.com/storage/docs/bucket-locations" target="_blank">documentation</a>
+			to learn about Bucket Locations. (Note that "Regional"
+			storage is cheaper than "Multi-regional" storage.)
+			</p>
+		</div>
+		<div class="form-group">
+			<label for="gcpDetailsRegionZone">Compute Zone</label>
+			<select id="gcpDetailsRegionZone" class="form-control">
+			</select>
+			<p class="help-block">
+			See the
+			<a href="https://cloud.google.com/compute/docs/regions-zones/regions-zones" target="_blank">documentation</a>
+			to learn about Regions and Zones.
+			</p>
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- serverUserName modal -->
+
+<div id="mServerUserName" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Configure your server user</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		Every Upspin server runs as its own Upspin user.
+		We will create a user derived from your user name,
+		with the addition of a suffix.
+		</p>
+		Specify a <b>user name suffix</b> for your Upspin server user.
+		The user name with suffix need not be a valid email address;
+		your Upspin user may register any number of "suffixed" users
+		without email verification.
+		</p>
+		<div class="form-group form-inline">
+			<div class="input-group">
+				<div id="serverUserNamePrefix" class="input-group-addon"></div>
+				<input id="serverUserNameSuffix" type="text" class="form-control" placeholder="suffix">
+				<div id="serverUserNameDomain" class="input-group-addon"></div>
+			</div>
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- serverSecretSeed modal -->
+
+<div  id="mServerSecretSeed" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Write down your server's secret key</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		An Upspin key pair was generated for the server user 
+		<b class="up-username"></b>
+		and stored in this directory on your local machine:
+		</p>
+		<pre id="serverSecretSeedKeyDir"></pre>
+		<p>
+		This key pair provides access to your server's Upspin identity
+		and data. If you lose the keys you can re-create them using
+		this "secret seed":
+		</p>
+		<pre id="serverSecretSeedSecretSeed"></pre>
+		<p>
+		<b>Write this down and store it in a secure, private place.
+		Do not share your secret key or this string with anyone.</b>
+		</p>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">OK, I wrote it down</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- serverHostName modal -->
+
+<div id="mServerHostName" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Configure your server host name</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		Your Upspin server is running on a virtual machine with the IP
+		address <b class="up-ipAddr"></b>.
+		</p>
+		<p>
+		Specify a <b>host name</b> for your Upspin server.
+		This name is not user-visible, appearing only in your key
+		server record, configuration file, and in the metadata for all
+		Upspin content you write.
+		</p>
+		<p>
+		If you wish to use a host name under a domain you control,
+		create a DNS A record for that host name that points to
+		<b class="up-ipAddr"></b> and specify the host name in the
+		field below.
+		</p>
+		<p>
+		Otherwise, you may leave the field blank to use a default host
+		name provided for you under the domain <b>upspin.services</b>.
+		</p>
+		<div class="form-group">
+			<input type="text" class="form-control" id="serverHostName" placeholder="Host name (leave blank for default)">
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- waitServerHostName modal -->
+
+<div id="mWaitServerHostName" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Wait for DNS propagation</h4>
+      </div>
+      <div class="modal-body">
+		<p class="up-ownDomain">
+		You have nominated the host name <b class="up-hostName"></b>
+		for use with your Upspin server.
+		Make sure you have set up a DNS "A record" that points that
+		host name to <b class="up-ipAddr"></b>.
+		</p>
+		<p class="up-upspinServices">
+		You opted to use a default host name (provided by the Upspin project)
+		for your Upspin server.
+		The assigned name is <b class="up-hostName"></b>.
+		You need not write this down; it will be stored in your key
+		server record and configuration file.
+		</p>
+		<p>
+		Wait a few minutes for the changes to propagate through
+		the DNS system before clicking 'Continue'.
+		(Please be patient; this can sometimes take up to an hour.)
+		</p>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger">Choose another host name</button>
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- serverWriters modal -->
+
+<div id="mServerWriters" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Configure server access control</h4>
+      </div>
+      <div class="modal-body">
+		<p>
+		Your Upspin server is configured to allow writes by your user
+		and the server user. If you would like to allow other users to
+		store their directory trees and content in your Upspin server,
+		add them to this list:
+		</p>
+		<div class="form-group">
+			<textarea class="form-control" id="serverWriters" placeholder="user@example.com" rows=4></textarea>
+		</div>
+		<div class="panel panel-danger up-error">
+			<div class="panel-heading">Error</div>
+			<div class="panel-body up-error-msg"></div>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- inspector modal -->
+
+<div id="mInspector" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Details</h4>
+      </div>
+      <div class="modal-body">
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<td class="up-entry-name"></td>
+			</tr>
+			<tr>
+				<th>Size</th>
+				<td class="up-entry-size"></td>
+			</tr>
+			<tr>
+				<th>Time</th>
+				<td class="up-entry-time"></td>
+			</tr>
+			<tr>
+				<th>Attributes</th>
+				<td class="up-entry-attr"></td>
+			</tr>
+			<tr>
+				<th>Writer</th>
+				<td class="up-entry-writer"></td>
+			</tr>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- delete/copy modal -->
+
+<div id="mConfirm" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title">Confirm <span class="up-action"></span></h4>
+      </div>
+      <div class="modal-body">
+	      <p>Recursively <span class="up-action"></span> these paths:</p>
+	      <ul class="up-paths">
+	      </ul>
+	      <div class="up-dest-message">
+	      	<p>to this directory:</p>
+	      	<ul><li class="up-dest"></ul>
+	      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary up-confirm-button">Confirm</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- mkdir modal -->
+
+<div id="mMkdir" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title">Make directory</h4>
+      </div>
+      <div class="modal-body">
+	<form>
+		<div class="form-group">
+			<input type="text" class="form-control up-path" placeholder="Upspin path">
+		</div>
+	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary up-mkdir-button">Make directory</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="third_party/jquery/jquery.min.js"></script>
+    <script src="third_party/bootstrap/js/bootstrap.min.js"></script>
+    <script src="third_party/ladda/spin.min.js"></script>
+    <script src="third_party/ladda/ladda.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
