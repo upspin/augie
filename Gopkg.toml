@@ -1,3 +1,6 @@
+# golang.org/x/text/gen.go imports this package; we don't depend on it.
+ignored = ["golang.org/x/text/collate"]
+
 [[constraint]]
   branch = "master"
   name = "golang.org/x/net"
