@@ -2,18 +2,14 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Command browser presents a web interface to the Upspin name space.
-// It operates as the user in the specified config.
-// It is still in its early stages of development and should be used with care.
 package main // import "augie.upspin.io/cmd/upspin-ui"
 
 // TODO(adg): Flesh out the inspector (show blocks, etc).
-// TODO(adg): Drag and drop support.
-// TODO(adg): Secure the web UI; only allow the local user to access it.
 // TODO(adg): Update the URL in the browser window to reflect the UI.
 // TODO(adg): Facility to add/edit Access files in UI.
 // TODO(adg): Awareness of Access files during copy and remove.
 // TODO(adg): Show progress of removes/copies in the user interface.
+// TODO(adg): Display links and handle their navigation properly.
 
 import (
 	"crypto/rand"
