@@ -600,6 +600,9 @@ func (s *server) startup(req *http.Request) (resp *startupResponse, cfg upspin.C
 		}, nil, nil
 	}
 
+	// Start cache if necessary.
+	cacheutil.Start(cfg)
+
 	if !readOnly {
 		if err := makeRoot(cfg); err != nil {
 			return nil, nil, err
@@ -613,8 +616,6 @@ func (s *server) startup(req *http.Request) (resp *startupResponse, cfg upspin.C
 	s.cli = client.New(cfg)
 	s.mu.Unlock()
 
-	// Start cache if necessary.
-	cacheutil.Start(cfg)
 	return nil, cfg, nil
 }
 
