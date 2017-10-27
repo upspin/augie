@@ -26,20 +26,27 @@ import (
 	"sync"
 	"time"
 
-	"augie.upspin.io/cmd/upspin-ui/static"
-
 	"golang.org/x/net/xsrftoken"
+
+	"augie.upspin.io/cmd/upspin-ui/static"
 
 	"upspin.io/errors"
 	"upspin.io/flags"
 	"upspin.io/upspin"
+	"upspin.io/version"
 
 	_ "upspin.io/transports"
 )
 
 func main() {
 	httpAddr := flag.String("http", "localhost:8000", "HTTP listen `address` (must be loopback)")
+	versionFlag := flag.Bool("version", false, "print version string and exit")
 	flags.Parse(flags.Client)
+
+	if *versionFlag {
+		fmt.Print(version.Version())
+		return
+	}
 
 	// Disallow listening on non-loopback addresses until we have a better
 	// security model. (Even this is not really secure enough.)
