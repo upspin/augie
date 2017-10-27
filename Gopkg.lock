@@ -58,12 +58,12 @@
 [[projects]]
   branch = "master"
   name = "upspin.io"
-  packages = ["access","bind","cache","client","client/clientutil","client/file","cloud/mail","cmd/cacheserver/cacheutil","config","dir/inprocess","dir/remote","dir/unassigned","errors","factotum","flags","key/inprocess","key/keygen","key/proquint","key/remote","key/sha256key","key/transports","key/unassigned","key/usercache","log","metric","pack","pack/ee","pack/eeintegrity","pack/internal","pack/packutil","pack/plain","path","rpc","rpc/local","serverutil","serverutil/signup","shutdown","store/inprocess","store/remote","store/transports","store/unassigned","subcmd","transports","upspin","upspin/proto","user","valid"]
+  packages = ["access","bind","cache","client","client/clientutil","client/file","cloud/mail","cmd/cacheserver/cacheutil","config","dir/inprocess","dir/remote","dir/unassigned","errors","factotum","flags","key/inprocess","key/keygen","key/proquint","key/remote","key/sha256key","key/transports","key/unassigned","key/usercache","log","metric","pack","pack/ee","pack/eeintegrity","pack/internal","pack/packutil","pack/plain","path","rpc","rpc/local","serverutil","serverutil/signup","shutdown","store/inprocess","store/remote","store/transports","store/unassigned","subcmd","transports","upspin","upspin/proto","user","valid","version"]
   revision = "dc8c743cf9d8c7935a157d5fb4d705c84e46169b"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "00ddad20c0ab3117e4b19527005a39aa933a14be02f42f3b9ee44ee3d7613c5d"
+  inputs-digest = "bcf10ba2e1ab59d558a8ac4113a3f5cf7b0891581b73708abfa17b27a11ec696"
   solver-name = "gps-cdcl"
   solver-version = 1
