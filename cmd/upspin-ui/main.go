@@ -34,12 +34,22 @@ import (
 	"upspin.io/flags"
 	"upspin.io/upspin"
 
+	augieversion "augie.upspin.io/version"
+	upspinversion "upspin.io/version"
+
 	_ "upspin.io/transports"
 )
 
 func main() {
 	httpAddr := flag.String("http", "localhost:8000", "HTTP listen `address` (must be loopback)")
+	version := flag.Bool("version", false, "print version string and exit")
 	flags.Parse(flags.Client)
+
+	if *version {
+		fmt.Printf("augie:\n%s\n", augieversion.Version())
+		fmt.Printf("upspin:\n%s\n", upspinversion.Version())
+		return
+	}
 
 	// Disallow listening on non-loopback addresses until we have a better
 	// security model. (Even this is not really secure enough.)
