@@ -205,7 +205,7 @@ func (s *server) startup(req *http.Request) (resp *startupResponse, cfg upspin.C
 	var response string
 	switch action {
 	case "register":
-		if err := signup.MakeRequest(signupURL, cfg); err != nil {
+		if err := signup.MakeRequest(signupURL, cfg, nil); err != nil {
 			if keyDir != "" {
 				// We have just generated the keys, so we
 				// should remove both the keys and the config,
