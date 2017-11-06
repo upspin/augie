@@ -9,6 +9,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -32,6 +33,13 @@ import (
 	"upspin.io/upspin"
 	"upspin.io/user"
 	"upspin.io/valid"
+)
+
+var defaultKeyServer = string(config.New().KeyEndpoint().NetAddr)
+
+var (
+	keyServerAddr = flag.String("keyserver", defaultKeyServer, "keyserver `address` (for signup; overriden by config)")
+	tlsCertDir    = flag.String("tlscerts", "", "TLS certificate `directory` (for signup; overridden by config)")
 )
 
 // noneEndpoint is a sentinel Endpoint value that should be passed to
@@ -656,6 +664,9 @@ func writeConfig(file string, user upspin.UserName, dir, store upspin.Endpoint, 
 		return err
 	}
 	cfg := fmt.Sprintf("username: %s\n", user)
+	if *keyServerAddr != defaultKeyServer {
+		cfg += fmt.Sprintf("keyserver: remote,%s\n", *keyServerAddr)
+	}
 	if dir != (upspin.Endpoint{}) {
 		cfg += fmt.Sprintf("dirserver: %s\n", dir)
 	}
@@ -663,6 +674,9 @@ func writeConfig(file string, user upspin.UserName, dir, store upspin.Endpoint, 
 		cfg += fmt.Sprintf("storeserver: %s\n", store)
 	}
 	cfg += "packing: ee\n"
+	if *tlsCertDir != "" {
+		cfg += fmt.Sprintf("tlscerts: %s\n", *tlsCertDir)
+	}
 	// Deactivated cache for now, as it seems to interact poorly with
 	// host@upspin.io. TODO(adg): turn it back on after more testing.
 	//cfg += "cache: yes\n" // TODO(adg): make this configurable?
@@ -679,7 +693,14 @@ func isRegistered(user upspin.UserName) (bool, error) {
 	// user is because the KeyServer.Lookup requests are not authenticated.
 	cfg := config.SetUserName(config.New(), "nobody@upspin.io")
 
-	key, err := bind.KeyServer(cfg, cfg.KeyEndpoint())
+	if *tlsCertDir != "" {
+		cfg = config.SetValue(cfg, "tlscerts", *tlsCertDir)
+	}
+
+	key, err := bind.KeyServer(cfg, upspin.Endpoint{
+		Transport: upspin.Remote,
+		NetAddr:   upspin.NetAddr(*keyServerAddr),
+	})
 	if err != nil {
 		return false, err
 	}
