@@ -34,8 +34,6 @@ import (
 	"upspin.io/valid"
 )
 
-const signupURL = "https://key.upspin.io/signup"
-
 // noneEndpoint is a sentinel Endpoint value that should be passed to
 // writeConfig when we wish to set the dirserver and/or storeserver
 // specifically to 'unassigned', to distinguish from the zero value.
@@ -205,7 +203,7 @@ func (s *server) startup(req *http.Request) (resp *startupResponse, cfg upspin.C
 	var response string
 	switch action {
 	case "register":
-		if err := signup.MakeRequest(signupURL, cfg); err != nil {
+		if err := signup.MakeRequest(cfg); err != nil {
 			if keyDir != "" {
 				// We have just generated the keys, so we
 				// should remove both the keys and the config,
