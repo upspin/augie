@@ -8,7 +8,10 @@ package main
 
 import (
 	"bytes"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -34,7 +37,12 @@ import (
 	"upspin.io/valid"
 )
 
-const signupURL = "https://key.upspin.io/signup"
+var defaultKeyServer = string(config.New().KeyEndpoint().NetAddr)
+
+var (
+	keyServerAddr = flag.String("keyserver", defaultKeyServer, "keyserver `address` (for signup; overriden by config)")
+	tlsCertDir    = flag.String("tlscerts", "", "TLS certificate `directory` (for signup; overridden by config)")
+)
 
 // noneEndpoint is a sentinel Endpoint value that should be passed to
 // writeConfig when we wish to set the dirserver and/or storeserver
@@ -205,7 +213,22 @@ func (s *server) startup(req *http.Request) (resp *startupResponse, cfg upspin.C
 	var response string
 	switch action {
 	case "register":
-		if err := signup.MakeRequest(signupURL, cfg, nil); err != nil {
+		signupURL := fmt.Sprintf("https://%s/signup", *keyServerAddr)
+		var client *http.Client
+		if *tlsCertDir != "" {
+			certPool, err := certPoolFromDir(*tlsCertDir)
+			if err != nil {
+				return nil, nil, err
+			}
+			client = &http.Client{
+				Transport: &http.Transport{
+					TLSClientConfig: &tls.Config{
+						RootCAs: certPool,
+					},
+				},
+			}
+		}
+		if err := signup.MakeRequest(signupURL, cfg, client); err != nil {
 			if keyDir != "" {
 				// We have just generated the keys, so we
 				// should remove both the keys and the config,
@@ -665,6 +688,12 @@ func writeConfig(file string, user upspin.UserName, dir, store upspin.Endpoint, 
 		cfg += fmt.Sprintf("storeserver: %s\n", store)
 	}
 	cfg += "packing: ee\n"
+	if *tlsCertDir != "" {
+		cfg += fmt.Sprintf("tlscerts: %s\n", *tlsCertDir)
+	}
+	if *keyServerAddr != defaultKeyServer {
+		cfg += fmt.Sprintf("keyserver: remote,%s\n", *keyServerAddr)
+	}
 	// Deactivated cache for now, as it seems to interact poorly with
 	// host@upspin.io. TODO(adg): turn it back on after more testing.
 	//cfg += "cache: yes\n" // TODO(adg): make this configurable?
@@ -681,7 +710,14 @@ func isRegistered(user upspin.UserName) (bool, error) {
 	// user is because the KeyServer.Lookup requests are not authenticated.
 	cfg := config.SetUserName(config.New(), "nobody@upspin.io")
 
-	key, err := bind.KeyServer(cfg, cfg.KeyEndpoint())
+	if *tlsCertDir != "" {
+		cfg = config.SetValue(cfg, "tlscerts", *tlsCertDir)
+	}
+
+	key, err := bind.KeyServer(cfg, upspin.Endpoint{
+		Transport: upspin.Remote,
+		NetAddr:   upspin.NetAddr(*keyServerAddr),
+	})
 	if err != nil {
 		return false, err
 	}
@@ -897,4 +933,30 @@ func formatResponse(resp *startupResponse) string {
 	}
 	b, _ := json.MarshalIndent(&r, "", "\t")
 	return string(b)
+}
+
+// certPoolFromDir parses any PEM files in the provided directory
+// and returns the resulting pool.
+// TODO(adg): export this from upspin.io/rpc and delete this copy.
+func certPoolFromDir(dir string) (*x509.CertPool, error) {
+	var pool *x509.CertPool
+	fis, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return nil, errors.Errorf("reading TLS Certificates in %q: %v", dir, err)
+	}
+	for _, fi := range fis {
+		name := fi.Name()
+		if filepath.Ext(name) != ".pem" {
+			continue
+		}
+		pem, err := ioutil.ReadFile(filepath.Join(dir, name))
+		if err != nil {
+			return nil, errors.Errorf("reading TLS Certificate %q: %v", name, err)
+		}
+		if pool == nil {
+			pool = x509.NewCertPool()
+		}
+		pool.AppendCertsFromPEM(pem)
+	}
+	return pool, nil
 }
