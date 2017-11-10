@@ -38,6 +38,8 @@ import (
 	_ "upspin.io/transports"
 )
 
+const defaultPath = "augie@upspin.io/" // Show this tree on startup.
+
 func main() {
 	httpAddr := flag.String("http", "localhost:8000", "HTTP listen `address` (must be loopback)")
 	versionFlag := flag.Bool("version", false, "print version string and exit")
@@ -192,15 +194,28 @@ func (s *server) serveAPI(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			errString = err.Error()
 		}
-		var user string
+		var (
+			user        upspin.UserName
+			left, right upspin.PathName
+		)
 		if cfg != nil {
-			user = string(cfg.UserName())
+			user = cfg.UserName()
+			right = defaultPath
+			// If the user has a directory endpoint then open to
+			// their tree. Otherwise, open both panels to augie.
+			if cfg.DirEndpoint().Transport == upspin.Remote {
+				left = upspin.PathName(user + "/")
+			} else {
+				left = right
+			}
 		}
 		resp = struct {
-			Startup  *startupResponse
-			UserName string
-			Error    string
-		}{sResp, user, errString}
+			Startup   *startupResponse
+			UserName  upspin.UserName
+			LeftPath  upspin.PathName
+			RightPath upspin.PathName
+			Error     string
+		}{sResp, user, left, right, errString}
 	case "list":
 		path := upspin.PathName(r.FormValue("path"))
 		des, err := s.cli.Glob(upspin.AllFilesGlob(path))
