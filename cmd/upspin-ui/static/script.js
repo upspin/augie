@@ -770,7 +770,7 @@ function Page() {
 		});
 	}
 
-	function startBrowsers() {
+	function startBrowsers(leftPath, rightPath) {
 		var browser1, browser2;
 		var parentEl = $(".up-browser-parent");
 		var methods = {
@@ -788,8 +788,8 @@ function Page() {
 			copyDestination: function() { return browser1.path },
 			refreshDestination: function() { browser1.refresh(); }
 		}, methods));
-		browser1.navigate(page.username);
-		browser2.navigate("augie@upspin.io");
+		browser1.navigate(leftPath);
+		browser2.navigate(rightPath);
 	}
 
 	// Obtain a request key.
@@ -814,7 +814,7 @@ function Page() {
 		// user name and launch the browsers.
 		page.username = data.UserName;
 		$("#headerUsername").text(page.username);
-		startBrowsers();
+		startBrowsers(data.LeftPath, data.RightPath);
 	});
 }
 
