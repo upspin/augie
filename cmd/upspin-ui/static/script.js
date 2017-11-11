@@ -814,6 +814,7 @@ function Page() {
 		// user name and launch the browsers.
 		page.username = data.UserName;
 		$("#headerUsername").text(page.username);
+		$("#headerVersion").text(data.Version);
 		startBrowsers(data.LeftPath, data.RightPath);
 	});
 }

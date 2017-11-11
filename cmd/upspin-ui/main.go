@@ -209,13 +209,18 @@ func (s *server) serveAPI(w http.ResponseWriter, r *http.Request) {
 				left = right
 			}
 		}
+		ver := "upspin-ui"
+		if sha := version.GitSHA; sha != "" {
+			ver = fmt.Sprintf("%s commit %.7s built %s", ver, sha, version.BuildTime.Format("2 Jan 06"))
+		}
 		resp = struct {
 			Startup   *startupResponse
 			UserName  upspin.UserName
 			LeftPath  upspin.PathName
 			RightPath upspin.PathName
+			Version   string
 			Error     string
-		}{sResp, user, left, right, errString}
+		}{sResp, user, left, right, ver, errString}
 	case "list":
 		path := upspin.PathName(r.FormValue("path"))
 		des, err := s.cli.Glob(upspin.AllFilesGlob(path))
