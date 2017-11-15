@@ -794,7 +794,16 @@ function Page() {
 
 	// Obtain a request key.
 	var prefix = "#key="
-	if (!window.location.hash.startsWith(prefix)) {
+	var storageKey = 'upspin-ui-key';
+	var loc = window.location;
+	var storage = window.localStorage;
+	if (loc.hash.startsWith(prefix)) { // from URL fragment -> copy to sessionStorage
+		page.key = loc.hash.slice(prefix.length);
+		storage.setItem(storageKey, page.key);
+		loc.hash = "";
+	} else if (page.key = storage.getItem(storageKey)) {
+		// got key from localStorage
+	} else {
 		$("#mLoading").modal("show").find(".up-error")
 			.show().find(".up-error-msg")
 			.text("No request key in browser URL.\n\n" +
@@ -805,8 +814,6 @@ function Page() {
 				"but with a different hash.");
 		return;
 	}
-	page.key = window.location.hash.slice(prefix.length);
-	window.location.hash = "";
 
 	// Begin the Startup sequence.
 	Startup(startup, function(data) {
