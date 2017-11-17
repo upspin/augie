@@ -42,6 +42,48 @@
     },
     {
       "key": {
+        "uuid": "84286b17_cf01164c",
+        "filename": "cmd/upspin-ui/static/script.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 6254
+      },
+      "writtenOn": "2017-11-17T06:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d2c68f7_7a24630d",
+      "range": {
+        "startLine": 798,
+        "startChar": 5,
+        "endLine": 798,
+        "endChar": 20
+      },
+      "revId": "e491db516b6a4f86312447fc07967a6372ba525c",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8f99bc3_b2a5834c",
+        "filename": "cmd/upspin-ui/static/script.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 6254
+      },
+      "writtenOn": "2017-11-17T06:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f91edd51_ac610076",
+      "revId": "e491db516b6a4f86312447fc07967a6372ba525c",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00a4484c_993189fd",
         "filename": "cmd/upspin-ui/static/script.js",
         "patchSetId": 2
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "af925780_66ac4e33",
+        "filename": "cmd/upspin-ui/static/script.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 6254
+      },
+      "writtenOn": "2017-11-17T06:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00a4484c_993189fd",
+      "range": {
+        "startLine": 800,
+        "startChar": 2,
+        "endLine": 800,
+        "endChar": 14
+      },
+      "revId": "e491db516b6a4f86312447fc07967a6372ba525c",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24cfedd2_9123cf94",
         "filename": "cmd/upspin-ui/static/script.js",
         "patchSetId": 2
@@ -85,6 +151,30 @@
       "revId": "e491db516b6a4f86312447fc07967a6372ba525c",
       "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "736ed6f5_275996cb",
+        "filename": "cmd/upspin-ui/static/script.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 6254
+      },
+      "writtenOn": "2017-11-17T06:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24cfedd2_9123cf94",
+      "range": {
+        "startLine": 802,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 83
+      },
+      "revId": "e491db516b6a4f86312447fc07967a6372ba525c",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": false
     }
   ]
 }
