@@ -125,11 +125,18 @@ function Browser(parentEl, page) {
 	var el = $("body > .up-template.up-browser").clone().removeClass("up-template");
 	el.appendTo(parentEl);
 
+	var firstNav = true;
 	function navigate(path) {
 		browser.path = path;
 		drawPath();
 		drawLoading("Loading directory...");
 		page.list(path, function(entries) {
+			var isOwnRoot = path == page.username()+"/";
+			var noEntries = !entries || entries.length == 0;
+			if (firstNav && isOwnRoot && noEntries) {
+				$("#mWelcome").modal("show");
+			}
+			firstNav = false;
 			drawEntries(entries);
 		}, function(error) {
 			reportError(error);
@@ -280,6 +287,8 @@ function Browser(parentEl, page) {
 	}
 
 	function drawEntries(entries) {
+		entries = entries || [];
+
 		inputs.attr("disabled", false);
 		loadingEl.hide();
 		errorEl.hide();
@@ -774,6 +783,7 @@ function Page() {
 		var browser1, browser2;
 		var parentEl = $(".up-browser-parent");
 		var methods = {
+			username: function() { return page.username; },
 			rm: rm,
 			copy: copy,
 			list: list,
