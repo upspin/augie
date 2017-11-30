@@ -53,11 +53,11 @@ func (s *server) copyEntry(dstDir upspin.PathName, srcEntry *upspin.DirEntry) er
 	if srcPath.NElem() == 0 {
 		// The browser user interface doesn't allow you to select a
 		// root for a copy, so this shouldn't come up in practice.
-		return errors.E(srcEntry.Name, errors.Str("cannot copy a root"))
+		return errors.E(srcEntry.Name, "cannot copy a root")
 	}
 	dstDirPath, _ := path.Parse(dstDir)
 	if dstDirPath.HasPrefix(srcPath) {
-		return errors.E(srcEntry.Name, errors.Str("cannot copy a directory into one of its sub-directories"))
+		return errors.E(srcEntry.Name, "cannot copy a directory into one of its sub-directories")
 	}
 
 	dst := path.Join(dstDir, srcPath.Elem(srcPath.NElem()-1))

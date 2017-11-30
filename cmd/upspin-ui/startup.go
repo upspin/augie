@@ -751,7 +751,7 @@ func putUser(cfg, userCfg upspin.Config) error {
 
 	f := userCfg.Factotum()
 	if f == nil {
-		return errors.E(userCfg.UserName(), errors.Str("user has no keys"))
+		return errors.E(userCfg.UserName(), "user has no keys")
 	}
 	newU := upspin.User{
 		Name:      userCfg.UserName(),
