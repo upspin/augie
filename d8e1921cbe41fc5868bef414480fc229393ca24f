@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e7b6771_707e411e",
+        "filename": "cmd/upspin-ui/static/index.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-12-08T01:19:58Z",
+      "side": 1,
+      "message": "trailing space. release blocker!",
+      "revId": "d8e1921cbe41fc5868bef414480fc229393ca24f",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": true
+    }
+  ]
+}
