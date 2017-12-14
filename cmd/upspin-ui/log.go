@@ -33,14 +33,14 @@ func init() {
 	l, err := newLogger()
 	if err != nil {
 		// Fall back to standard error if we can't log to a file.
-		l = log.New(os.Stderr, "browser: ", log.LstdFlags)
+		l = log.New(os.Stderr, "upspin-ui: ", log.LstdFlags)
 		l.Print(err)
 	}
 	logger.Logger = l
 }
 
 // newLogger initializes a log.Logger that writes to
-// $HOME/upspin/log/browser.log and redirects the Upspin logger and the
+// $HOME/upspin/log/upspin-ui.log and redirects the Upspin logger and the
 // standard logger to that file.
 func newLogger() (*log.Logger, error) {
 	home, err := config.Homedir()
@@ -51,7 +51,7 @@ func newLogger() (*log.Logger, error) {
 	if err := os.MkdirAll(dir, 0755); err != nil {
 		return nil, err
 	}
-	file := filepath.Join(dir, "browser.log")
+	file := filepath.Join(dir, "upspin-ui.log")
 	const flags = os.O_WRONLY | os.O_CREATE | os.O_APPEND
 	f, err := os.OpenFile(file, flags, 0600)
 	if err != nil {
