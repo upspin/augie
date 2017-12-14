@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5cf657d_31594911",
+        "filename": "cmd/upspin-ui/doc.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-12-14T02:57:56Z",
+      "side": 1,
+      "message": "s/default/\u0026 value/",
+      "revId": "e686b48e9f8e701e371fc9323541af71b07eba89",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcb4facf_0c227547",
+        "filename": "cmd/upspin-ui/doc.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-12-14T02:57:56Z",
+      "side": 1,
+      "message": "$USER ?",
+      "revId": "e686b48e9f8e701e371fc9323541af71b07eba89",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5be1492e_39f1d82f",
+        "filename": "cmd/upspin-ui/doc.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-12-14T02:57:56Z",
+      "side": 1,
+      "message": "deplopment indeed.",
+      "revId": "e686b48e9f8e701e371fc9323541af71b07eba89",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "224ebdc5_3cf994ed",
+        "filename": "cmd/upspin-ui/doc.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-12-14T02:57:56Z",
+      "side": 1,
+      "message": "s/The/This/",
+      "revId": "e686b48e9f8e701e371fc9323541af71b07eba89",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d2fa3f8_3557f60b",
+        "filename": "cmd/upspin-ui/doc.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-12-14T02:57:56Z",
+      "side": 1,
+      "message": "$USER ?",
+      "revId": "e686b48e9f8e701e371fc9323541af71b07eba89",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": true
+    }
+  ]
+}
