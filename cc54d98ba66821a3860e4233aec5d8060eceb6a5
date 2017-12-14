@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fa45e99_a184f23b",
+        "filename": "cmd/upspin-ui/doc.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2017-12-14T06:40:58Z",
+      "side": 1,
+      "message": "my fault, but $USER is probably a mistake here as it\u0027s a predefined Unix environment name. but the text clarifies so maybe it\u0027s ok.",
+      "revId": "cc54d98ba66821a3860e4233aec5d8060eceb6a5",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03",
+      "unresolved": true
+    }
+  ]
+}
