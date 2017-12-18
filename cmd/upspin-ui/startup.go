@@ -273,6 +273,11 @@ func (s *server) startup(req *http.Request) (resp *startupResponse, cfg upspin.C
 			return nil, nil, err
 		}
 
+		// Put the updated snapshot user config to the key server.
+		if err := putSnapshotUser(cfg); err != nil {
+			return nil, nil, errors.Errorf("error updating key server for snapshot user:\n%v", err)
+		}
+
 	case "specifyNoEndpoints":
 		cfg = config.SetDirEndpoint(cfg, noneEndpoint)
 		cfg = config.SetStoreEndpoint(cfg, noneEndpoint)
@@ -412,6 +417,9 @@ func (s *server) startup(req *http.Request) (resp *startupResponse, cfg upspin.C
 			return nil, nil, err
 		}
 		if err := putUser(cfg, nil); err != nil {
+			return nil, nil, err
+		}
+		if err := putSnapshotUser(cfg); err != nil {
 			return nil, nil, err
 		}
 
@@ -774,6 +782,16 @@ func putUser(cfg, userCfg upspin.Config) error {
 		return nil
 	}
 	return key.Put(&newU)
+}
+
+// putSnapshotUser updates the key server record for the given user's snapshot user.
+func putSnapshotUser(cfg upspin.Config) error {
+	user, _, domain, err := user.Parse(cfg.UserName())
+	if err != nil {
+		return err
+	}
+	snapCfg := config.SetUserName(cfg, upspin.UserName(user+"+snapshot@"+domain))
+	return putUser(cfg, snapCfg)
 }
 
 // serviceHostName registers an upspin.services host name with host@upspin.io
