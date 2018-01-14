@@ -318,8 +318,8 @@ func (s *gcpState) createAddress() (ip string, err error) {
 
 // createInstance creates a Compute instance named "upspinserver" running the
 // upspinserver Docker image and a firewall rule to allow HTTPS connections to
-// that instance. If a firewall rule of the name "allow-https" exists it is
-// re-used.
+// that instance. If a firewall rule of the name "allow-http-https" exists it
+// is re-used.
 func (s *gcpState) createInstance() error {
 	client := s.JWTConfig.Client(context.Background())
 	svc, err := compute.New(client)
@@ -328,7 +328,7 @@ func (s *gcpState) createInstance() error {
 	}
 
 	const (
-		firewallName = "allow-https"
+		firewallName = "allow-http-https"
 		firewallTag  = firewallName
 
 		instanceName = "upspinserver"
@@ -338,9 +338,9 @@ func (s *gcpState) createInstance() error {
 	firewall := &compute.Firewall{
 		Allowed: []*compute.FirewallAllowed{{
 			IPProtocol: "tcp",
-			Ports:      []string{"443"},
+			Ports:      []string{"80", "443"},
 		}},
-		Description:  "Allow HTTPS",
+		Description:  "Allow HTTP and HTTPS",
 		Name:         firewallName,
 		SourceRanges: []string{"0.0.0.0/0"},
 		TargetTags:   []string{firewallTag},
@@ -556,9 +556,9 @@ func (s *gcpState) configureServer(writers []upspin.UserName) error {
 
 // cloudInitYAML is the cloud-init configuration file for the virtual machine
 // running Google's Container-Optimized OS. It instructs the machine to accept
-// incoming TCP connections on port 443 and to run the
+// incoming TCP connections on ports 80 and 443 and to run the
 // gcr.io/upspin-containers-upspinserver Docker image, exposing the
-// upspinserver service on port 443.
+// upspinserver service on ports 80 and 443.
 const cloudInitYAML = `#cloud-config
 
 users:
@@ -566,6 +566,7 @@ users:
   uid: 2000
 
 runcmd:
+- iptables -w -A INPUT -p tcp --dport 80 -j ACCEPT
 - iptables -w -A INPUT -p tcp --dport 443 -j ACCEPT
 
 write_files:
@@ -581,7 +582,7 @@ write_files:
     Environment="HOME=/home/upspin"
     ExecStartPre=/usr/bin/docker-credential-gcr configure-docker
     ExecStartPre=/usr/bin/docker pull gcr.io/upspin-containers/upspinserver:latest
-    ExecStart=/usr/bin/docker run --rm -u=2000 --volume=/home/upspin:/upspin -p=443:8443 --name=upspinserver gcr.io/upspin-containers/upspinserver:latest
+    ExecStart=/usr/bin/docker run --rm -u=2000 --volume=/home/upspin:/upspin -p=80:8080 -p=443:8443 --name=upspinserver gcr.io/upspin-containers/upspinserver:latest
     ExecStop=/usr/bin/docker stop upspinserver
     ExecStopPost=/usr/bin/docker rm upspinserver
     Restart=on-failure
