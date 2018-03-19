@@ -16,13 +16,11 @@ import (
 
 	"upspin.io/bind"
 	"upspin.io/log"
-	"upspin.io/rpc"
 	"upspin.io/upspin"
 )
 
 var (
 	writethrough = flag.Bool("writethrough", false, "make storage cache writethrough")
-	cacheSize    = flag.Int64("cachesize", 5e9, "max disk `bytes` for cache")
 )
 
 // detach detaches a process from the parent process group,
@@ -30,18 +28,19 @@ var (
 var detach = func(*exec.Cmd) {}
 
 // Start starts the cacheserver if the config requires it and it is not already running.
-func Start(cfg upspin.Config) {
+func Start(cfg upspin.Config) (usingCache bool) {
 	if cfg == nil {
 		return
 	}
-	ce, err := rpc.CacheEndpoint(cfg)
-	if err != nil || ce == nil {
+	ce := cfg.CacheEndpoint()
+	if ce.Unassigned() {
 		// TODO(adg): log error message?
 		return // not using a cache server
 	}
+	usingCache = true
 
 	// Ping the cache server.
-	if err := ping(cfg, ce); err == nil {
+	if err := ping(cfg, &ce); err == nil {
 		return // cache server running
 	}
 
@@ -59,8 +58,7 @@ func Start(cfg upspin.Config) {
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		if err := cmd.Run(); err != nil {
-			log.Info.Printf("Starting cacheserver: %s", err)
-			fmt.Fprintf(os.Stderr, "Failed to start cacheserver; continuing without.\n")
+			log.Info.Printf("cacheserver terminated or not started: %s", err)
 			close(cacheErrorChan)
 		}
 	}()
@@ -73,12 +71,13 @@ func Start(cfg upspin.Config) {
 			return
 		default:
 		}
-		if err := ping(cfg, ce); err == nil {
+		if err := ping(cfg, &ce); err == nil {
 			return
 		}
 	}
 
 	fmt.Fprintf(os.Stderr, "Timed out waiting for cacheserver to start.\n")
+	return
 }
 
 // addFlag adds a flag to the command if it is at a non-default value.

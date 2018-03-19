@@ -16,3 +16,9 @@ ignored = ["golang.org/x/text/collate"]
 [[constraint]]
   branch = "master"
   name = "upspin.io"
+
+[prune]
+  non-go = true
+  unused-packages = true
+  go-tests = true
+
