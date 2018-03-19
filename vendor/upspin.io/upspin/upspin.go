@@ -144,6 +144,13 @@ type Factotum interface {
 	// no longer than your key's curve order. Don't use without a security consult.
 	Sign(hash []byte) (Signature, error)
 
+	// HKDF cryptographically mixes salt, info, and the Factotum secret and
+	// writes the result to out, which may be of any length but is typically
+	// 8 or 16 bytes. The result is unguessable without the secret, and does
+	// not leak the secret. For more information, see package
+	// golang.org/x/crypto/hkdf.
+	HKDF(salt, info, out []byte) error
+
 	// Pop derives a Factotum that defaults to the previous key.
 	Pop() Factotum
 
@@ -826,6 +833,9 @@ type Config interface {
 
 	// StoreEndpoint is the endpoint of the StoreServer in which to place new data items.
 	StoreEndpoint() Endpoint
+
+	// CacheEndpoint is the endpoint of the cache server between the client and the StoreServer and DirServers.
+	CacheEndpoint() Endpoint
 
 	// Value returns the value for the given configuration key.
 	Value(key string) string

@@ -22,30 +22,76 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["context","context/ctxhttp","xsrftoken"]
+  packages = [
+    "context",
+    "context/ctxhttp",
+    "xsrftoken"
+  ]
   revision = "4b14673ba32bee7f5ac0f990a48f033919fd418b"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/oauth2"
-  packages = [".","google","internal","jws","jwt"]
+  packages = [
+    ".",
+    "google",
+    "internal",
+    "jws",
+    "jwt"
+  ]
   revision = "bb50c06baba3d0c76f9d125c0719093e315b5b44"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
-  packages = ["cases","internal","internal/gen","internal/tag","internal/triegen","internal/ucd","language","runes","secure/bidirule","secure/precis","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable","width"]
+  packages = [
+    "cases",
+    "internal",
+    "internal/gen",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "runes",
+    "secure/bidirule",
+    "secure/precis",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+    "width"
+  ]
   revision = "6eab0e8f74e86c598ec3b6fad4888e0c11482d48"
 
 [[projects]]
   branch = "master"
   name = "google.golang.org/api"
-  packages = ["compute/v1","gensupport","googleapi","googleapi/internal/uritemplates","iam/v1","servicemanagement/v1","storage/v1"]
+  packages = [
+    "compute/v1",
+    "gensupport",
+    "googleapi",
+    "googleapi/internal/uritemplates",
+    "iam/v1",
+    "servicemanagement/v1",
+    "storage/v1"
+  ]
   revision = "52fedcc3d56e51c5f1a571d48092238ab2746c73"
 
 [[projects]]
   name = "google.golang.org/appengine"
-  packages = [".","internal","internal/app_identity","internal/base","internal/datastore","internal/log","internal/modules","internal/remote_api","internal/urlfetch","urlfetch"]
+  packages = [
+    ".",
+    "internal",
+    "internal/app_identity",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/modules",
+    "internal/remote_api",
+    "internal/urlfetch",
+    "urlfetch"
+  ]
   revision = "150dc57a1b433e64154302bdc40b6bb8aefa313a"
   version = "v1.0.0"
 
@@ -58,8 +104,57 @@
 [[projects]]
   branch = "master"
   name = "upspin.io"
-  packages = ["access","bind","cache","client","client/clientutil","client/file","cloud/mail","cmd/cacheserver/cacheutil","config","dir/inprocess","dir/remote","dir/unassigned","errors","factotum","flags","key/inprocess","key/keygen","key/proquint","key/remote","key/sha256key","key/transports","key/unassigned","key/usercache","log","metric","pack","pack/ee","pack/eeintegrity","pack/internal","pack/packutil","pack/plain","path","rpc","rpc/local","serverutil","serverutil/signup","shutdown","store/inprocess","store/remote","store/transports","store/unassigned","subcmd","transports","upspin","upspin/proto","user","valid","version"]
-  revision = "93ca68f0c0e2d8f1fb5d2c7a1e0138ef561f3ef3"
+  packages = [
+    "access",
+    "bind",
+    "cache",
+    "client",
+    "client/clientutil",
+    "client/file",
+    "cloud/mail",
+    "cmd/cacheserver/cacheutil",
+    "config",
+    "dir/inprocess",
+    "dir/remote",
+    "dir/unassigned",
+    "errors",
+    "factotum",
+    "flags",
+    "key/inprocess",
+    "key/keygen",
+    "key/proquint",
+    "key/remote",
+    "key/sha256key",
+    "key/transports",
+    "key/unassigned",
+    "key/usercache",
+    "log",
+    "metric",
+    "pack",
+    "pack/ee",
+    "pack/eeintegrity",
+    "pack/internal",
+    "pack/packutil",
+    "pack/plain",
+    "path",
+    "rpc",
+    "rpc/local",
+    "serverutil",
+    "serverutil/signup",
+    "shutdown",
+    "store/inprocess",
+    "store/remote",
+    "store/transports",
+    "store/unassigned",
+    "subcmd",
+    "transports",
+    "upspin",
+    "upspin/proto",
+    "user",
+    "valid",
+    "version"
+  ]
+  revision = "2e37c3b2c427b239f286de76ee3379ece3b2a636"
 
 [solve-meta]
   analyzer-name = "dep"

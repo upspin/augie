@@ -412,19 +412,6 @@ func (c *Client) getReaders(op errors.Op, name upspin.PathName, accessEntry *ups
 	return readers, nil
 }
 
-// isReadableByAll returns true if all@upspin.io has read rights.
-// The default is false, for example if there are any errors in reading Access.
-// The access package restricts where the "all" word can appear; here we
-// trust that it has done its job.
-func (c *Client) isReadableByAll(readers []upspin.UserName) bool {
-	for _, reader := range readers {
-		if reader == access.AllUsers {
-			return true
-		}
-	}
-	return false
-}
-
 func makeDirectoryLookupFn(dir upspin.DirServer, entry *upspin.DirEntry, s *metric.Span) (*upspin.DirEntry, error) {
 	defer s.StartSpan("dir.makeDirectory").End()
 	entry.SignedName = entry.Name // Make sure they match as we step through links.
@@ -790,7 +777,7 @@ func (c *Client) dupOrRename(op errors.Op, oldName, newName upspin.PathName, ren
 
 	packer := pack.Lookup(entry.Packing)
 	if packer == nil {
-		return nil, errors.E(op, oldName, errors.Invalid, errors.Errorf("unrecognized Packing %d", c.config.Packing()))
+		return nil, errors.E(op, oldName, errors.Invalid, errors.Errorf("unrecognized Packing %d", entry.Packing))
 	}
 	if access.IsAccessControlFile(newName) {
 		return nil, errors.E(op, newName, errors.Invalid, "Access or Group files cannot be renamed")
