@@ -3,28 +3,36 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E3D36D61E8AFFD8003C011C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3D36D51E8AFFD8003C011C /* AppDelegate.m */; };
-		7E3D36D91E8AFFD8003C011C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3D36D81E8AFFD8003C011C /* main.m */; };
-		7E3D36DE1E8AFFD8003C011C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E3D36DD1E8AFFD8003C011C /* Assets.xcassets */; };
-		7E3D36E11E8AFFD8003C011C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E3D36DF1E8AFFD8003C011C /* Main.storyboard */; };
+		17A296C725E17EDF00FB66E1 /* Augie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A296C625E17EDF00FB66E1 /* Augie.swift */; };
+		17A296CB25E17EE000FB66E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17A296CA25E17EE000FB66E1 /* Assets.xcassets */; };
+		17A296D125E17EE000FB66E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17A296CF25E17EE000FB66E1 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		17DC3BDE25F6601300ABCEB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17A296BB25E17EDF00FB66E1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17DC3BD925F63F3600ABCEB1;
+			remoteInfo = libwarden;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		7E3D36D11E8AFFD8003C011C /* Augie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Augie.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E3D36D41E8AFFD8003C011C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7E3D36D51E8AFFD8003C011C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7E3D36D81E8AFFD8003C011C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7E3D36DD1E8AFFD8003C011C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7E3D36E01E8AFFD8003C011C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7E3D36E21E8AFFD8003C011C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17A296C325E17EDF00FB66E1 /* Augie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Augie.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17A296C625E17EDF00FB66E1 /* Augie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Augie.swift; sourceTree = "<group>"; };
+		17A296CA25E17EE000FB66E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		17A296D025E17EE000FB66E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		17A296D225E17EE000FB66E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17A296D325E17EE000FB66E1 /* Augie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Augie.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7E3D36CE1E8AFFD8003C011C /* Frameworks */ = {
+		17A296C025E17EDF00FB66E1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -34,125 +42,145 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7E3D36C81E8AFFD8003C011C = {
+		17A296BA25E17EDF00FB66E1 = {
 			isa = PBXGroup;
 			children = (
-				7E3D36D31E8AFFD8003C011C /* Augie */,
-				7E3D36D21E8AFFD8003C011C /* Products */,
+				17A296C525E17EDF00FB66E1 /* Augie */,
+				17A296C425E17EDF00FB66E1 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
-		7E3D36D21E8AFFD8003C011C /* Products */ = {
+		17A296C425E17EDF00FB66E1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7E3D36D11E8AFFD8003C011C /* Augie.app */,
+				17A296C325E17EDF00FB66E1 /* Augie.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7E3D36D31E8AFFD8003C011C /* Augie */ = {
+		17A296C525E17EDF00FB66E1 /* Augie */ = {
 			isa = PBXGroup;
 			children = (
-				7E3D36D41E8AFFD8003C011C /* AppDelegate.h */,
-				7E3D36D51E8AFFD8003C011C /* AppDelegate.m */,
-				7E3D36DD1E8AFFD8003C011C /* Assets.xcassets */,
-				7E3D36DF1E8AFFD8003C011C /* Main.storyboard */,
-				7E3D36E21E8AFFD8003C011C /* Info.plist */,
-				7E3D36D71E8AFFD8003C011C /* Supporting Files */,
+				17A296C625E17EDF00FB66E1 /* Augie.swift */,
+				17A296CA25E17EE000FB66E1 /* Assets.xcassets */,
+				17A296CF25E17EE000FB66E1 /* Main.storyboard */,
+				17A296D225E17EE000FB66E1 /* Info.plist */,
+				17A296D325E17EE000FB66E1 /* Augie.entitlements */,
 			);
 			path = Augie;
 			sourceTree = "<group>";
-		};
-		7E3D36D71E8AFFD8003C011C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7E3D36D81E8AFFD8003C011C /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 /* End PBXGroup section */
 
-/* Begin PBXNativeTarget section */
-		7E3D36D01E8AFFD8003C011C /* Augie */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7E3D36E51E8AFFD8003C011C /* Build configuration list for PBXNativeTarget "Augie" */;
+/* Begin PBXLegacyTarget section */
+		17DC3BD925F63F3600ABCEB1 /* libwarden */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 17DC3BDC25F63F3600ABCEB1 /* Build configuration list for PBXLegacyTarget "libwarden" */;
 			buildPhases = (
-				7E3D36CD1E8AFFD8003C011C /* Sources */,
-				7E3D36CE1E8AFFD8003C011C /* Frameworks */,
-				7E3D36CF1E8AFFD8003C011C /* Resources */,
+			);
+			buildToolPath = make;
+			dependencies = (
+			);
+			name = libwarden;
+			passBuildSettingsInEnvironment = 1;
+			productName = libwarden;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXNativeTarget section */
+		17A296C225E17EDF00FB66E1 /* Augie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17A296D625E17EE000FB66E1 /* Build configuration list for PBXNativeTarget "Augie" */;
+			buildPhases = (
+				17A296BF25E17EDF00FB66E1 /* Sources */,
+				17A296C025E17EDF00FB66E1 /* Frameworks */,
+				17A296C125E17EDF00FB66E1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				17DC3BDF25F6601300ABCEB1 /* PBXTargetDependency */,
 			);
 			name = Augie;
 			productName = Augie;
-			productReference = 7E3D36D11E8AFFD8003C011C /* Augie.app */;
+			productReference = 17A296C325E17EDF00FB66E1 /* Augie.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7E3D36C91E8AFFD8003C011C /* Project object */ = {
+		17A296BB25E17EDF00FB66E1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Upspin Project";
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					7E3D36D01E8AFFD8003C011C = {
-						CreatedOnToolsVersion = 8.3;
-						ProvisioningStyle = Automatic;
+					17A296C225E17EDF00FB66E1 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					17DC3BD925F63F3600ABCEB1 = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = 7E3D36CC1E8AFFD8003C011C /* Build configuration list for PBXProject "Augie" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			buildConfigurationList = 17A296BE25E17EDF00FB66E1 /* Build configuration list for PBXProject "Augie" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 7E3D36C81E8AFFD8003C011C;
-			productRefGroup = 7E3D36D21E8AFFD8003C011C /* Products */;
+			mainGroup = 17A296BA25E17EDF00FB66E1;
+			productRefGroup = 17A296C425E17EDF00FB66E1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7E3D36D01E8AFFD8003C011C /* Augie */,
+				17A296C225E17EDF00FB66E1 /* Augie */,
+				17DC3BD925F63F3600ABCEB1 /* libwarden */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7E3D36CF1E8AFFD8003C011C /* Resources */ = {
+		17A296C125E17EDF00FB66E1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E3D36DE1E8AFFD8003C011C /* Assets.xcassets in Resources */,
-				7E3D36E11E8AFFD8003C011C /* Main.storyboard in Resources */,
+				17A296D125E17EE000FB66E1 /* Main.storyboard in Resources */,
+				17A296CB25E17EE000FB66E1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7E3D36CD1E8AFFD8003C011C /* Sources */ = {
+		17A296BF25E17EDF00FB66E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E3D36D91E8AFFD8003C011C /* main.m in Sources */,
-				7E3D36D61E8AFFD8003C011C /* AppDelegate.m in Sources */,
+				17A296C725E17EDF00FB66E1 /* Augie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		17DC3BDF25F6601300ABCEB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17DC3BD925F63F3600ABCEB1 /* libwarden */;
+			targetProxy = 17DC3BDE25F6601300ABCEB1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
-		7E3D36DF1E8AFFD8003C011C /* Main.storyboard */ = {
+		17A296CF25E17EE000FB66E1 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7E3D36E01E8AFFD8003C011C /* Base */,
+				17A296D025E17EE000FB66E1 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -160,34 +188,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7E3D36E31E8AFFD8003C011C /* Debug */ = {
+		17A296D425E17EE000FB66E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -201,41 +239,54 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		7E3D36E41E8AFFD8003C011C /* Release */ = {
+		17A296D525E17EE000FB66E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -243,32 +294,80 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
-		7E3D36E61E8AFFD8003C011C /* Debug */ = {
+		17A296D725E17EE000FB66E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Augie/Augie.entitlements;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Augie/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/lib";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.upspinproject.Augie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/lib";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		17A296D825E17EE000FB66E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Augie/Augie.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Augie/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/lib";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.upspinproject.Augie;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/lib";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		17DC3BDA25F63F3600ABCEB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		7E3D36E71E8AFFD8003C011C /* Release */ = {
+		17DC3BDB25F63F3600ABCEB1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Augie/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.upspinproject.Augie;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -276,24 +375,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7E3D36CC1E8AFFD8003C011C /* Build configuration list for PBXProject "Augie" */ = {
+		17A296BE25E17EDF00FB66E1 /* Build configuration list for PBXProject "Augie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7E3D36E31E8AFFD8003C011C /* Debug */,
-				7E3D36E41E8AFFD8003C011C /* Release */,
+				17A296D425E17EE000FB66E1 /* Debug */,
+				17A296D525E17EE000FB66E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7E3D36E51E8AFFD8003C011C /* Build configuration list for PBXNativeTarget "Augie" */ = {
+		17A296D625E17EE000FB66E1 /* Build configuration list for PBXNativeTarget "Augie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7E3D36E61E8AFFD8003C011C /* Debug */,
-				7E3D36E71E8AFFD8003C011C /* Release */,
+				17A296D725E17EE000FB66E1 /* Debug */,
+				17A296D825E17EE000FB66E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17DC3BDC25F63F3600ABCEB1 /* Build configuration list for PBXLegacyTarget "libwarden" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17DC3BDA25F63F3600ABCEB1 /* Debug */,
+				17DC3BDB25F63F3600ABCEB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7E3D36C91E8AFFD8003C011C /* Project object */;
+	rootObject = 17A296BB25E17EDF00FB66E1 /* Project object */;
 }
