@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51238dbf_e7e39394",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6642
+      },
+      "writtenOn": "2021-03-07T20:31:09Z",
+      "side": 1,
+      "message": "Hi!\n\nI spent some time messing around with xcode and got to a working statusbar menu for Augie. Screenshot in the description.\n\nThis is something I wanted and seemed like a good exercise to learn linking swift to go, so I had a try. If there\u0027s interest still I\u0027m happy to polish it up.\n\n(I tried ccing andybons but gerrit says they\u0027re not a user.)",
+      "revId": "af0df00ff40b8dfe3b1936f3f38e969b9062f2de",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03"
+    }
+  ]
+}
