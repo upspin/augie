@@ -31,3 +31,7 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+## Go object files and headers
+lib/*.h
+lib/*.a
