@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4036d9d7_8bac6130",
+        "filename": "LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 5305
+      },
+      "writtenOn": "2023-06-26T00:19:11Z",
+      "side": 1,
+      "message": "Not a problem to include it, but this isn\u0027t part of the license and could be deleted.",
+      "revId": "d71b73cd34da5d5a03823ea7a86d480c48d48d4b",
+      "serverId": "0759ed4b-3fdc-34dc-866b-f2e708168c03"
+    }
+  ]
+}
